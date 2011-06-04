@@ -1,10 +1,8 @@
 RewriteEngine on
 
-
 RewriteBase /
 RewriteCond %{HTTP_HOST} ^www.myclankonto\.net$ [NC]
 RewriteRule ^(.*)$ http://myclankonto.net/$1 [R=301,L]
-
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
