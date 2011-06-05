@@ -4,12 +4,8 @@
     
     ini_set("display_errors", 1);
     
-    Loader::addAutoLoad();
-    
-    Registry::init();
-    
-    if(isset($_GET['x']))
-    Registry::add("set", "bla", true);
-    
-    echo Registry::get("set");
+    Loader   :: addAutoLoad();
+    Registry :: init();
+    Router   :: init();
+    Router   :: getParams();
 ?>
