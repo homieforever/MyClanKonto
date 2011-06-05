@@ -9,7 +9,14 @@
             }
             else
             {
-                throw new Exception('loader->addAutoLoad(): Es wurde ein nicht gültiger Callback angegeben.');
+                if($function == NULL)
+                {
+                    return spl_autoload_register("self::dafaultLoad");
+                }
+                else
+                {
+                    throw new Exception('loader->addAutoLoad(): Es wurde ein nicht gültiger Callback angegeben.');
+                }
             }
         }
         
@@ -20,6 +27,14 @@
                 return spl_autoload_unregister($function);
             }
             return false;
+        }
+        
+        static public function dafaultLoad($classname = NULL)
+        {
+            if(file_exists(SYS_PATH . "classes/".strtolower($classname).".php") & $classname != NULL)
+            {
+                require_once SYS_PATH . "classes/".strtolower($classname).".php";
+            }
         }
     }
 ?>
