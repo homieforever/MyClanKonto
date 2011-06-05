@@ -6,7 +6,7 @@
         public function __construct()
         {
              session_start();
-             if(isset($_SESSION['_registry']) === FALSE)
+             if(!isset($_SESSION['_registry']))
              {
                  $_SESSION['_registry'] = array();
              }
