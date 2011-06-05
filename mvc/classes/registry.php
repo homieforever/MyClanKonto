@@ -1,18 +1,18 @@
 <?php
     abstract class Registry
     {
-        private $values = array();
+        private static $values = array();
         
-        public function __construct()
+        public function init()
         {
-             session_start();
-             if(!isset($_SESSION['_registry']))
-             {
-                 $_SESSION['_registry'] = array();
-             }
+            if(!isset($_SESSION['_registry']))
+            {
+                $_SESSION['_registry'] = array();
+            }
+            session_start("test");
         }
         
-        public function add($key, $value, $persist = false)
+        public static function add($key, $value, $persist = false)
         {
             if($persist)
             {
@@ -24,47 +24,48 @@
             }
             else
             {
-                if(!isset($this->values[$key]))
+                if(!isset(self::$values[$key]))
                 {
-                    $this->values[$key]= $value;
+                    self::$values[$key]= $value;
                     return true;
                 }
             }
             return false;
         }
         
-        public function get($key)
+        public static function get($key)
         {
+            var_dump($_SESSION);
             if(isset($_SESSION['_registry'][$key]))
             {
                  return $_SESSION['_registry'][$key];
             }
-            elseif(isset($this->values[$key]))
+            else if(isset(self::$values[$key]))
             {
-                return $this->values[$key];
+                return self::$values[$key];
             }
             return NULL;
         }
         
-        public function unadd($key)
+        public static function unadd($key)
         {
             if(isset($_SESSION['_registry'][$key]))
             {
                 unset($_SESSION['_registry'][$key]);
                 return true;
             }
-            elseif(isset($this->values[$key]))
+            else if(isset(self::$values[$key]))
             {
-                unset($this->values[$key]);
+                unset(self::$values[$key]);
                 return true;
             }
             return false;    
         }
         
-        public function reset()
+        public static function reset()
         {
             $_SESSION['_registry'] = array();
-            $this->values = array();
+            self::$values = array();
             return true;
         }
     }
