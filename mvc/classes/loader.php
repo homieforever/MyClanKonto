@@ -1,6 +1,7 @@
 <?php
     abstract class loader
     {
+        private $maps = array(); 
         public function addAutoLoad($function = NULL)
         {
             if($function != NULL && is_callable($function))
@@ -26,7 +27,7 @@
             {
                 if(is_array($map))
                 {
-                    
+                    $this->maps = $map;
                 }
                 else
                 {
