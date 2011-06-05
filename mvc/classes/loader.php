@@ -1,9 +1,9 @@
 <?php
-    class loader
+    abstract class loader
     {
         public function addAutoLoad($function = NULL)
         {
-            if($function != NULL && is_callback($function))
+            if($function != NULL && is_callable($function))
             {
                 return spl_autoload_register($function);
             }
