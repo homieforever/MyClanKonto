@@ -12,9 +12,9 @@
              }
         }
         
-        public function add($key, $value, $scope = false)
+        public function add($key, $value, $persist = false)
         {
-            if($scope)
+            if($persist)
             {
                 if(!isset($_SESSION['_registry'][$key]))
                 {
