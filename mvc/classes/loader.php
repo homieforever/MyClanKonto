@@ -20,6 +20,25 @@
             }
         }
         
+        public function addMap($map = null)
+        {
+            if($map != NULL)
+            {
+                if(is_array($map))
+                {
+                    
+                }
+                else
+                {
+                    throw new Exception('loader->addMap(): Es wurde eine nicht gültige Map angegeben.');
+                }
+            }
+            else
+            {
+                require_once SYS_PATH . "maps/classMap.php";
+            }
+        }
+        
         public function unsetAutoLoad($function = NULL)
         {
             if($function != NULL)
