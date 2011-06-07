@@ -6,6 +6,9 @@
     
     Loader   :: addAutoLoad();
     Registry :: init();
+    
+    Router   :: addMap();
     Router   :: init();
-    Router   :: getParams();
+    
+    var_dump(Router   :: getParams());
 ?>

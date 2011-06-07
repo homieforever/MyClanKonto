@@ -116,7 +116,16 @@ abstract class Router
              self::$action = 'index';
          }
      }
-
+     
+     public static function addMap($file = "maps/routerMap.php")
+     {
+         require_once SYS_PATH . $file;
+         foreach($values as $data)
+         {
+             self::addRule($data[0], $data[1]);
+         }
+     }
+     
      public static function addRule($rule, $target)
      {
          self::$rules[$rule] = $target;
