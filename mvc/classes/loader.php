@@ -53,6 +53,10 @@
         {
             if(file_exists(SYS_PATH . "classes/".strtolower($classname).".php") & $classname != NULL)
             {
+                if(file_exists(SYS_PATH . "configs/".strtolower($classname).".php"))
+                {
+                    require_once SYS_PATH . "configs/".strtolower($classname).".php";
+                }
                 require_once SYS_PATH . "classes/".strtolower($classname).".php";
             }
         }

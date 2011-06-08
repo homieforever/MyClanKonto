@@ -10,5 +10,15 @@
     Router   :: addMap();
     Router   :: init();
     
-    var_dump(Router   :: getParams());
+    $controller = Router :: getController();
+    
+    if($controller == 'site' OR
+       $controller == 'admin')
+    {
+        $controller::init();
+    }
+    else
+    {
+        header("");
+    }
 ?>

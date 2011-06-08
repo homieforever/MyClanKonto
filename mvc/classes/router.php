@@ -108,12 +108,12 @@ abstract class Router
 
          if(!strlen(self::$controller))
          {
-             self::$controller = 'home';
+             self::$controller = 'site';
          }
 
          if(!strlen(self::$action))
          {
-             self::$action = 'index';
+             self::$action = '';
          }
      }
      
