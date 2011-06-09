@@ -26,8 +26,13 @@
             if(isset(self::$maps[$name]))
             {
                 $file = self::$maps[$name];
+                
                 if(file_exists(SYS_PATH . $file))
                 {
+                    if(file_exists(SYS_PATH . "configs/".$name.".php"))
+                    {
+                        require_once SYS_PATH . "configs/".$name.".php";
+                    }
                     require_once SYS_PATH . $file;
                 }
             }
