@@ -12,7 +12,7 @@
                 self::$routerData['clanid'] = 1;
             }
             
-            echo "SITE CONTROLLER";
+            MySQL :: init();
         }
     }
 ?>

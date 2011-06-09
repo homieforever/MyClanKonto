@@ -19,6 +19,6 @@
     }
     else
     {
-        header("");
+        header("Location: http://myclankonto.net/");
     }
 ?>

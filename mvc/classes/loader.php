@@ -21,6 +21,18 @@
             }
         }
         
+        public function load($name)
+        {
+            if(isset(self::$maps[$name]))
+            {
+                $file = self::$maps[$name];
+                if(file_exists(SYS_PATH . $file))
+                {
+                    require_once SYS_PATH . $file;
+                }
+            }
+        }
+        
         public function addMap($map = null)
         {
             if($map != NULL)
