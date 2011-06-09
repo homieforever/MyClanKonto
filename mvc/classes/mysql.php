@@ -9,50 +9,50 @@
  	
 	public function __destuct()
 	{
-            if($this->connected == true)
+            if(self::$connected == true)
             {
-                @mysql_close($this->connection);
+                mysql_close(self::$connection);
             }
 	}
         
 	private function connect()
 	{
-            if($this->connected == false)
+            if(self::$connected == false)
 	    {
-                $this->connection = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);
-		mysql_select_db(MYSQL_DATABASE, $this->connection);
-		mysql_set_charset(MYSQL_CHARSET, $this->connection);
-		$this->connected = true;
+                self::$connection = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);
+		mysql_select_db(MYSQL_DATABASE, self::$connection);
+		mysql_set_charset(MYSQL_CHARSET, self::$connection);
+		self::$connected = true;
             }
 	}
 			
 	public function insert_ID()
 	{
-            return mysql_insert_id($this->connection);
+            return mysql_insert_id(self::$connection);
 	}
 	
 	public function query($query)
 	{
             if(!empty($query) && trim($query) != "")
             {
-                $this->connect();
-		$this->result = mysql_query($query, $this->connection);
+                self::$connect();
+		self::$result = mysql_query($query, self::$connection);
 	    }
         }
 	
         public function fetchArray()
 	{
-            return mysql_fetch_array($this->result);
+            return mysql_fetch_array(self::$result);
 	}
 	
 	public function fetchAssoc()
 	{
-            return mysql_fetch_assoc($this->result);
+            return mysql_fetch_assoc(self::$result);
 	}
 	
         public function count()
 	{
-            return mysql_num_rows($this->result);
+            return mysql_num_rows(self::$result);
         }
     }
 ?>
