@@ -1,10 +1,15 @@
 <?php
     $values = array(
-        // Seite
+        // Site
         
         array("/:clanid/site/", array('controller' => 'site', 'action' => '')),
         array("/:clanid/site/:site/", array('controller' => 'site', 'action' => '')),
         array("/:clanid/site/:site/:id", array('controller' => 'site', 'action' => '')),
+        
+        // Sitestylecheet
+        
+        array("/:clanid/stylecheet.css", array('controller' => 'stylecheet', 'action' => '')),
+        
         
         // Admin
         

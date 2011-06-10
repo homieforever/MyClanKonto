@@ -13,7 +13,8 @@
     $controller = Router :: getController();
     
     if($controller == 'site' OR
-       $controller == 'admin')
+       $controller == 'admin' OR
+       $controller == 'stylecheet')
     {
         $controller::init();
     }

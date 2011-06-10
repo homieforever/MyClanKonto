@@ -35,8 +35,8 @@
 	{
             if(!empty($query) && trim($query) != "")
             {
-                self::$connect();
-		self::$result = mysql_query($query, self::$connection);
+                self::connect();
+		self::$result = mysql_query($query, self::$connection) or Log::write("mysql", mysql_error());
 	    }
         }
 	

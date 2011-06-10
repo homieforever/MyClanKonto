@@ -3,6 +3,8 @@
                     "registry" => "classes/registry.php",
                     "router"   => "classes/router.php",
                     "site"     => "classes/site.php",
-                    "mysql"    => "classes/mysql.php"
+                    "mysql"    => "classes/mysql.php",
+                    "log"      => "classes/log.php",
+                    "template" => "classes/template.php"
                    );
 ?>
