@@ -1,7 +1,8 @@
 <?php
     abstract class loader
     {
-        private $maps = array(); 
+        public static $maps = array(); 
+        
         public function addAutoLoad($function = NULL)
         {
             if($function != NULL && is_callable($function))
@@ -42,18 +43,13 @@
         {
             if($map != NULL)
             {
-                if(is_array($map))
-                {
-                    $this->maps = $map;
-                }
-                else
-                {
-                    throw new Exception('loader->addMap(): Es wurde eine nicht gültige Map angegeben.');
-                }
+                 require_once SYS_PATH . "maps/".$map;
+                 self::$maps = $values;
             }
             else
             {
                 require_once SYS_PATH . "maps/classMap.php";
+                self::$maps = $values;
             }
         }
         

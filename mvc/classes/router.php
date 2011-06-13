@@ -81,7 +81,7 @@ abstract class Router
      }
 
      public static function init()
-     {
+     {   
          $url = $_SERVER['REQUEST_URI'];
          $isCustom = false;
 

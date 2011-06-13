@@ -5,6 +5,7 @@
     ini_set("display_errors", 1);
     
     Loader   :: addAutoLoad();
+    Loader   :: addMap();
     Registry :: init();
     
     Router   :: addMap();
