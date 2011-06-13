@@ -5,6 +5,7 @@
                     "site"     => "classes/site.php",
                     "mysql"    => "classes/mysql.php",
                     "log"      => "classes/log.php",
-                    "template" => "classes/template.php"
+                    "template" => "classes/template.php",
+                    "subdomain" => "classes/subdomain.php"
                    );
 ?>
