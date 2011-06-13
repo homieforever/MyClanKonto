@@ -9,6 +9,10 @@
     
     Router   :: addMap();
     Router   :: init();
+    if(Router::getParams() == NULL)
+    {
+        Subdomain :: init();
+    }
     
     $controller = Router :: getController();
     

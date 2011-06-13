@@ -1,7 +1,7 @@
 <?php
     abstract class site
     {   
-        static private $routerData = array();
+        static private$routerData = array();
         static public $clanData = array();
         
         public function __construct() {  }
@@ -12,6 +12,11 @@
             if(!isset(self::$routerData['clanid']))
             {
                 self::$routerData['clanid'] = 1;
+            }
+            
+            if(!isset(self::$routerData['site']))
+            {
+                self::$routerData['site'] = "news";
             }
             
             self::testIfSiteExists();
