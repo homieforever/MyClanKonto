@@ -1,5 +1,5 @@
 <?php
-    abstract class site
+    abstract class stylecheet
     {   
         static private$routerData = array();
         static public $clanData = array();
@@ -19,9 +19,13 @@
                 self::$routerData['site'] = "news";
             }
             
-            self::testIfSiteExists();
-            self::testIfSiteClosed();
-            self::testTemplateType();
+            if(self::testIfSiteExists())
+            {
+                if(!self::testIfSiteClosed())
+                {
+                    self::testTemplateType();
+                }
+            }
         }
         
         public static function testIfSiteExists()
@@ -30,22 +34,26 @@
             
             if(MySQL :: count() != 1)
             {
-                die("SEITE EXISTIERT NICHT!");
+                return false;
             }
             else
+            {
                 self::$clanData = MySQL :: fetchArray();
+                return true;
+            }
         }
         
         public static function testIfSiteClosed()
         {
             if(self::$clanData['siteBanned'])
             {
-                // geschlossen von MyClanKonto
+                return true;
             }
             else if(self::$clanData['closedFromAdmin'])
             {
-               // geschlossen vom Leader des Clans
+               return true;
             }
+            return false;
         }
         
         private static function testTemplateType()
@@ -58,35 +66,34 @@
                 }
                 else
                 {
-                    Template::init("templates/standart.html");
+                    Template::init("templates/standart_stylecheet.css");
                     
-                    Template::replace("</head>", "\n".Template::leerzeichen("<title>").'<link rel="stylesheet" type="text/css" href="http://myclankonto.net/'.self::$routerData['clanid'].'/stylecheet.css" />'."\n".Template::leerzeichen("<head>").'</head>');
-                    Template::replaceContent("{seiteninhalt}", "pages/site/".self::$routerData['site'].".php");
-                    Template::replace("{title}", self::$clanData['pageTitle']);
+                    Template::replace("{header_height}", self::$clanData['designset_headerheight']);
+                    
+                    Template::set("Content-Type: text/css");
                     
                     echo Template::out();
                 }
             }
             else
             {
-                MySQL :: query("SELECT * FROM `inhalte` WHERE `clanid`='".self::$routerData['clanid']."' AND `template`='1' AND `templateType`='5'");
+                MySQL :: query("SELECT * FROM `inhalte` WHERE `template`='1' AND `templateType`='5'");
                 
-                if(MySQL::count() == 1)
+                if(MySQL::count())
                 {
-                    $row = MySQL::fetchArray();
-                    Template::init(NULL, true, $row['inhalt']);
                     MySQL :: query("SELECT * FROM `inhalte` WHERE `template`='1' AND `templateType`='6'");
                     
                     if(MySQL::count())
                     {
-                        Template::replace("</head>", "\n".Template::leerzeichen("<title>").'<link rel="stylesheet" type="text/css" href="http://myclankonto.net/'.self::$routerData['clanid'].'/stylecheet.css" />'."\n".Template::leerzeichen("<head>").'</head>');
+                        $row = MySQL::fetchArray();
+                        Template::init(NULL, true, $row['inhalt']);
+                        
+                        Template::replace("{header_height}", self::$clanData['designset_headerheight']);
+                        
+                        Template::set("Content-Type: text/css");
+                        
+                        echo Template::out();
                     }
-                    
-                    
-                    Template::replaceContent("{seiteninhalt}", "pages/site/".self::$routerData['site'].".php");
-                    Template::replace("{title}", self::$clanData['pageTitle']);
-                    
-                    echo Template::out();
                 }
                 else
                 {

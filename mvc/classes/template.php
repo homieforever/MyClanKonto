@@ -4,11 +4,15 @@
         private static $template;
         private static $templateZeilen;
         
-        public static function init($fileName = NULL, $parseZeilen = true)
+        public static function init($fileName = NULL, $parseZeilen = true, $fileContent = NULL)
         {
             if($fileName != NULL)
             {
                 self::$template = self::loadFile($fileName);
+            }
+            else
+            {
+                self::$template = $fileContent;
             }
             
             if($parseZeilen)
@@ -27,6 +31,11 @@
             {
                 Log :: write("file", SYS_PATH . $name . " dosen't exists.");
             }
+        }
+        
+        public static function set($data)
+        {
+            header($data);
         }
         
         public static function explodeTemplateZeilen()
@@ -100,6 +109,16 @@
                     self::replace($name, $content);
                 }
             }
+        }
+        
+        public function pregreplace($name, $replacement = NULL)
+        {
+            if($name != NULL && $replacement != NULL)
+            {
+                self::$template = preg_replace($name, $replacement, self::$template);
+                return true;
+            }
+            return false;
         }
         
         public static function replace($name = NULL, $replacement = NULL)

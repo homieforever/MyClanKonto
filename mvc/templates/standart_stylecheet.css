@@ -1,0 +1,22 @@
+/* 
+    Document   : standart_stylecheet.css generatet by MyClanKonto.net
+    Author     : MyClanKonto.net
+    Description:
+        The Stylecheet where Generatet by MyClanKonto for a Standart Clansite of this System.
+*/
+
+html, body {
+    margin:2px;
+    padding:0px;
+}
+
+div#wrapper {
+    width:1014px;
+    margin: 0 auto;
+}
+
+div#header {
+    background-image: url('{header_url}header.{header_format}');
+    height:{header_height}px;
+    background-color:blue;
+}
