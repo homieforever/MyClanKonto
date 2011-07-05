@@ -7,6 +7,7 @@
                     "log"        => "classes/log.php",
                     "template"   => "classes/template.php",
                     "subdomain"  => "classes/subdomain.php",
-                    "stylecheet" => "classes/stylecheet.php"
+                    "stylecheet" => "classes/stylecheet.php",
+                    "siteData"   => "classes/siteData.php"
                    );
 ?>

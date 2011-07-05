@@ -1,12 +1,12 @@
 <?php
     abstract class site
     {   
-        static private$routerData = array();
+        static private $routerData = array();
         static public $clanData = array();
         
         public function __construct() {  }
         
-        public static function init()
+        public static function init($action = "news")
         {
             self::$routerData = Router::getParams();
             if(!isset(self::$routerData['clanid']))
@@ -19,21 +19,9 @@
                 self::$routerData['site'] = "news";
             }
             
-            self::testIfSiteExists();
-            self::testIfSiteClosed();
+            SiteData::siteExists(self::$routerData['clanid']);
+            self::$clanData = SiteData::getSiteData(self::$routerData['clanid']);
             self::testTemplateType();
-        }
-        
-        public static function testIfSiteExists()
-        {
-            MySQL :: query("SELECT * FROM `webseiten` WHERE `clanid`='".self::$routerData['clanid']."'");
-            
-            if(MySQL :: count() != 1)
-            {
-                die("SEITE EXISTIERT NICHT!");
-            }
-            else
-                self::$clanData = MySQL :: fetchArray();
         }
         
         public static function testIfSiteClosed()
@@ -50,9 +38,9 @@
         
         private static function testTemplateType()
         {
-            if(self::$clanData['premiumBis'] < time())
+            if(self::$clanData['data']['premiumBis'] < time())
             {
-                if(!empty(self::$clanData['useStandartDesign']))
+                if(!empty(self::$clanData['data']['useStandartDesign']))
                 {
                     echo "Eigenes Standart Design ";
                 }
@@ -62,7 +50,7 @@
                     
                     Template::replace("</head>", "\n".Template::leerzeichen("<title>").'<link rel="stylesheet" type="text/css" href="http://myclankonto.net/'.self::$routerData['clanid'].'/stylecheet.css" />'."\n".Template::leerzeichen("<head>").'</head>');
                     Template::replaceContent("{seiteninhalt}", "pages/site/".self::$routerData['site'].".php");
-                    Template::replace("{title}", self::$clanData['pageTitle']);
+                    Template::replace("{title}", self::$clanData['data']['pageTitle']);
                     
                     echo Template::out();
                 }
@@ -84,7 +72,7 @@
                     
                     
                     Template::replaceContent("{seiteninhalt}", "pages/site/".self::$routerData['site'].".php");
-                    Template::replace("{title}", self::$clanData['pageTitle']);
+                    Template::replace("{title}", self::$clanData['data']['pageTitle']);
                     
                     echo Template::out();
                 }

@@ -115,6 +115,11 @@ abstract class Router
          {
              self::$action = '';
          }
+         
+         if(self::$action == ':site')
+         {
+             self::$action = self::getParam("site");
+         }
      }
      
      public static function addMap($file = "maps/routerMap.php")

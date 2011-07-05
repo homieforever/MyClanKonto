@@ -2,10 +2,11 @@
     $values = array(
         // Site
         
-        array("/:clanid/site/", array('controller' => 'site', 'action' => '')),
-        array("/:clanid/site/:site/", array('controller' => 'site', 'action' => '')),
-        array("/:clanid/site/:site", array('controller' => 'site', 'action' => '')),
+        array("/:clanid/site/", array('controller' => 'site', 'action' => 'init')),
+        array("/:clanid/site/:site/", array('controller' => 'site', 'action' => ':site')),
+        array("/:clanid/site/:site", array('controller' => 'site', 'action' => ':site')),
         array("/:clanid/site/:site/:id", array('controller' => 'site', 'action' => '')),
+        array("/:clanid/site/:site/:id/", array('controller' => 'site', 'action' => '')),
         
         // Sitestylecheet
         

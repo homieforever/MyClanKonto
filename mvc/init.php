@@ -11,18 +11,21 @@
     Router   :: addMap();
     Router   :: init();
     
+    var_dump(Router::getParams());
+    
     if(Router::getParams() == NULL)
     {
         Subdomain :: init();
     }
     
     $controller = Router :: getController();
+    $action = Router :: getAction();
     
     if($controller == 'site' OR
        $controller == 'admin' OR
        $controller == 'stylecheet')
     {
-        $controller::init();
+        $controller::init($action);
     }
     else
     {
